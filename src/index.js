@@ -1,22 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import initialData from './initial-data';
+import '@atlaskit/css-reset';
+import styled from 'styled-components';
+
+import initialData from './data/2017.json';
+import accounts from './data/accounts.json';
+import Column from './column';
+
+const Container = styled.div`
+  display: flex;
+`;
+
+const data = {
+  transactions : initialData,
+  accounts: accounts
+}
 
 class App extends React.Component {
-  state = initialData;
+  state = data;
 
   render() {
-    return this.state.operations.map(operation => {
-      const opTitle = operation.title;
-      const opDetails = operation.details;
-
-      return (
-        <>
-        <h3>{opTitle}</h3>
-        <p>{opDetails}</p>
-        </>
-      )
-    })
+    return (
+      <Container>
+        <Column key="transactions-column" title="Transactions" transactions={this.state.transactions} />
+        <Column key="accounts-column" title="Accounts" accounts={this.state.accounts} />
+      </Container>
+    )
   }
 }
 
