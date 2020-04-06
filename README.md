@@ -32,6 +32,9 @@ Datele pot fi date fie prin js import, fie lipte într-un text area.
 
 ### Functionalități
 
+- Aplicația va dispune de un textarea unde se vor introduce numele conturilor sub formă de listă (documentație)
+ - prin apasarea unui buton, sub textarea se va popula/updata o coloană cu lista de conturi;
+ 
 - Aplicația va randa listele de tranzacții și conturi una lângă alta
   - listele sunt derulabile - numărul de conturi și de tranzacții sunt măricele: conturi 50-100, tranzacții 1000
   - să încapă pe ecran cât mai multe
