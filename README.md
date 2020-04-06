@@ -28,8 +28,7 @@ Datele pot fi date fie prin js import, fie lipte într-un text area.
 
 ### Date de ieșire
 
-- list de tranzacții atașate contului
-
+- list de tranzacții atașate contului în format json și în format ledger/hledger
 
 #### Sugestii UI/UX
 
