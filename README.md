@@ -133,6 +133,8 @@ Tranzacțiile pot fi reprezentate ca și carduri cu informațiile următoare:
 
 Utilizatorul va putea exporta asocierile de cont + tranzacție într-un json / format ledger pe care să îl salveze (text area de unde poate fi copiat sau altfel ?!)
 
+![app prototype](transaction-mockup3.png)
+
 ### Codul proiectului
 
 Va fi urcat la `https://github.com/netdava/transaction-selector`
