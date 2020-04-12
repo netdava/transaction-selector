@@ -35,36 +35,36 @@ export default class Column extends React.Component {
                         <div className="row">
                             {this.props.title === 'Transactions' &&
                                 <div className="col-md-12">
-                                    <div class="input-group input-group-sm mb-3">
-                                        <div class="input-group-prepend">
-                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Source Account</button>
-                                            <div class="dropdown-menu">
+                                    <div className="input-group input-group-sm mb-3">
+                                        <div className="input-group-prepend">
+                                            <button className="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Source Account</button>
+                                            <div className="dropdown-menu">
                                                acounts...
                                 </div>
                                         </div>
-                                        <input type="text" class="form-control" aria-label="Text input with dropdown button"></input>
+                                        <input type="text" className="form-control" aria-label="Text input with dropdown button"></input>
                                     </div>
                                 </div>
                             }
 
                             <div className="col-md-6">
-                                <div class="input-group input-group-sm mb-3">
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-outline-success" type="submit">Search</button>
+                                <div className="input-group input-group-sm mb-3">
+                                    <div className="input-group-prepend">
+                                        <button className="btn btn-outline-success" type="submit">Search</button>
                                     </div>
-                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+                                    <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
                                 </div>
                             </div>
                             {this.props.title === 'Transactions' &&
                                 <div className="col-md-6">
-                                    <div class="btn-group btn-group-sm">
-                                        <button type="button" class="btn btn-outline-secondary">All transactions</button>
-                                        <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
-                                            <span class="sr-only">Toggle Dropdown</span>
+                                    <div className="btn-group btn-group-sm">
+                                        <button type="button" className="btn btn-outline-secondary">All transactions</button>
+                                        <button type="button" className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
+                                            <span className="sr-only">Toggle Dropdown</span>
                                         </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
-                                            <a class="dropdown-item" href="1">Expences</a>
-                                            <a class="dropdown-item" href="2">Incomes</a>
+                                        <div className="dropdown-menu" aria-labelledby="dropdownMenuReference">
+                                            <a className="dropdown-item" href="1">Expences</a>
+                                            <a className="dropdown-item" href="2">Incomes</a>
                                         </div>
                                     </div>
                                 </div>
