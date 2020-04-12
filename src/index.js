@@ -17,19 +17,17 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <div className="jumbotron">
           <div className="container-fluid">
-            <div className="row">
+            <div className="row my-3">
               <div className="col-md-12">
                 <h2>Transactions selector</h2>
               </div>
             </div>
           </div>
-        </div>
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-4">
-              <textarea className="form-control" rows="5"></textarea>
+              <textarea className="form-control" rows="5" placeholder="Accounts list:"></textarea>
             </div>
             <div className="col-md-4">
               <button type="button" className="btn btn-outline-primary btn-block mb-2">Update Accounts list</button>
@@ -50,7 +48,7 @@ class App extends React.Component {
               <Column key="accounts-column" title="Accounts" accounts={this.state.accounts} />
             </div>
             <div className="col-md-4">
-              <Column title="Selected acount's transactions" />
+              <Column title="Assigned transactions" />
             </div>
             <div className="col-md-4">
               <Column key="transactions-column" title="Transactions" transactions={this.state.transactions} />

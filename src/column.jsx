@@ -2,11 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import Transaction from './transaction';
 import Account from './account';
+import AssignedTransaction from './assigned-transaction';
 
 const Container = styled.div`
     margin: 8px;
     border: 1px solid lightgray;
     border-radius: 2px;
+    height: 600px;
+    overflow: scroll;
+    overflow-x: hidden;
 
     display: flex;
     flex-direction: column;
@@ -27,42 +31,45 @@ export default class Column extends React.Component {
             <Container>
                 <Title>{this.props.title}</Title>
                 <Filter>
-                    <form class="form-inline">
-                        {this.props.title === 'Transactions' &&
-                            <div class="input-group input-group-sm mb-3">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Source Account</button>
-                                    <div class="dropdown-menu">
-                                        ...
+                    <form>
+                        <div className="row">
+                            {this.props.title === 'Transactions' &&
+                                <div className="col-md-12">
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Source Account</button>
+                                            <div class="dropdown-menu">
+                                               acounts...
                                 </div>
-                                </div>
-                                <input type="text" class="form-control" aria-label="Text input with dropdown button"></input>
-                            </div>
-                        }
-
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                            </div>
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                        </div>
-                        {this.props.title === 'Transactions' &&
-                            <>
-                                <div class="btn-group">
-                                    <button class="btn btn-outline-secondary btn-sm" type="button">
-                                        All transactions
-                                </button>
-                                    <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span class="sr-only">Toggle Dropdown</span>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="1">All</a>
-                                        <a class="dropdown-item" href="2">Credit transactions</a>
-                                        <a class="dropdown-item" href="3">Debit transactions</a>
+                                        </div>
+                                        <input type="text" class="form-control" aria-label="Text input with dropdown button"></input>
                                     </div>
                                 </div>
-                            </>
-                        }
+                            }
+
+                            <div className="col-md-6">
+                                <div class="input-group input-group-sm mb-3">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-success" type="submit">Search</button>
+                                    </div>
+                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+                                </div>
+                            </div>
+                            {this.props.title === 'Transactions' &&
+                                <div className="col-md-6">
+                                    <div class="btn-group btn-group-sm">
+                                        <button type="button" class="btn btn-outline-secondary">All transactions</button>
+                                        <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+                                            <a class="dropdown-item" href="1">Expences</a>
+                                            <a class="dropdown-item" href="2">Incomes</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
                     </form>
                 </Filter>
                 <Items>
@@ -80,6 +87,9 @@ export default class Column extends React.Component {
                             )
                         }
                     )}
+                    {this.props.title === "Assigned transactions" &&
+                        <AssignedTransaction />
+                    }
                 </Items>
             </Container>
         );

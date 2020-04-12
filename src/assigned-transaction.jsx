@@ -35,7 +35,7 @@ const Details = styled.div`
 `;
 const Info = styled.div``;
 
-const Footer = styled.div`
+const Line = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction: row;
@@ -50,32 +50,31 @@ const Sum = styled.div`
     font-size: 12px;
     color: #a9a9a9;
 `;
+const Button = styled.button`
+ 
+`;
 
-function Transaction(props) {
-    const { transaction } = props;
-    const { title, date, parsedDetails: { Detalii, Beneficiar }, credit, debit } = transaction;
-    const resetDate = new window.Date(date);
-    const day = resetDate.getDate();
-    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const month = monthNames[resetDate.getMonth()];
-
+function AssignedTransaction() {
     return (
         <Container>
             <Date>
-                <Day>{day}</Day>
-                <Month>{month}</Month>
+                <Day>18</Day>
+                <Month>Aug</Month>
             </Date>
             <Details>
-                <Info>{Detalii ? Detalii : Beneficiar ? Beneficiar : ' - '}</Info>
-                <Footer>
-                    <Title>{title}</Title>
-                    <Sum>{credit === '0' ? 
-                        <span className="text-danger">{debit}</span> : 
-                        <span className="text-success">{credit}</span>}</Sum>
-                </Footer>
+                <Info>Journey in the center of the Earth</Info>
+                <Line>
+                    <Title>Adventures</Title>
+                    <Sum className="text-danger">500</Sum>
+                </Line>
+                <Line>
+                    <Title className="text-info">From: Assets:INGB:Cont Curent</Title>
+                    <Title className="text-info">To: Expenses:Adventures</Title>
+                    <Button>switch</Button>
+                </Line>
             </Details>
         </Container>
     )
 }
 
-export default Transaction;
+export default AssignedTransaction;
