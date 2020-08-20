@@ -1,4 +1,4 @@
-const convert = require("xml-js");
+const xmlbuilder2 = require("xmlbuilder2");
 const fs = require("fs");
 const transactions = require("./data/2017.json");
 
@@ -6,23 +6,31 @@ const { mapTransaction } = require("./ofx-converter");
 
 
 const header = {
-    OFXHEADER: '100',
-    DATA: 'OFXSGML',
-    VERSION: '103',
-    SECURITY: 'NONE',
-    ENCODING: 'USASCII',
-    CHARSET: '1252',
-    COMPRESSION: 'NONE',
-    OLDFILEUID: 'NONE',
-    NEWFILEUID: 'NONE'
+    START: {
+        OFXHEADER: '100',
+        DATA: 'OFXSGML',
+        VERSION: '103',
+        SECURITY: 'NONE',
+        ENCODING: 'USASCII',
+        CHARSET: '1252',
+        COMPRESSION: 'NONE',
+        OLDFILEUID: 'NONE',
+        NEWFILEUID: 'NONE'
+    }
 };
 
 const body = {
-    SIGNONMSGSRSV1: {},
+    OFX: {
+        SIGNONMSGSRSV1: {},
     BANKMSGSRSV1: {
         STMTTRNRS: {
             STMTRS: {
                 CURDEF: "RON",
+                BANKACCTFROM: {
+                    BANKID: '000000007',
+                    ACCTID: '00000013',
+                    ACCTTYPE: "CHECKING"
+                },
                 BANKTRANLIST: {
                     STMTTRN: [
                         transactions.map(t => mapTransaction(t)),
@@ -31,15 +39,14 @@ const body = {
             }
         }
     }
+    }
 };
 
-const ofx = {
-    START: header,
-    OFX: body
-}
+const frag = xmlbuilder2.fragment();
+frag.ele(header);
+frag.ele(body);
 
-var options = { compact: true, ignoreComment: true, spaces: 4 };
-const ofx_string = convert.js2xml(ofx, options);
-console.log(ofx_string);
+const xml = frag.end({ prettyPrint: true });
+console.log(xml);
 
-fs.writeFileSync("build/newdata.ofx", ofx_string);
+fs.writeFileSync("build/newdata.ofx", xml);
