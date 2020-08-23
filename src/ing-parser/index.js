@@ -6,7 +6,7 @@ import ro from 'date-fns/locale/ro';
 
 /**
  * Process CSV file with ING transactions and return a javacript array with all the transactions.
- * @param {*} file
+ * @param {*} data
  */
 export function processCsv(data) {
   const cleanedCsv = cleanTransactionsLines(data);
