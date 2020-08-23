@@ -16,13 +16,15 @@ function transactionAmt(credit, debit) {
 }
 
 function mapTransaction(tx) {
-    const { credit, debit, date, txNumber, title } = tx;
+    const { credit, debit, date, txNumber, title, details, parsedDetails } = tx;
     return {
         TRNTYPE: transactionType(credit, debit),
         DTPOSTED: dateFns.format(new Date(date), "yyyyMMdd"),
         TRNAMT: transactionAmt(credit, debit),
-        FITID: txNumber,
-        MEMO: title
+        NAME: parsedDetails.Terminal,
+        FITID: `x-${date}-${txNumber}`,
+        MEMO: details.toString(),
+        REFNUM: parsedDetails.Referinta,
     }
 };
 

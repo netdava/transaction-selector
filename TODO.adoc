@@ -1,9 +1,9 @@
-- eliminam header, folosesc builder
-- sa folosesc API de date si time in js - https://date-fns.org/docs/Getting-Started
-- details -> MEMO
-- referinta la REFNUM ( cand exista)
-- informatii despre PAYEE
-- de scos FITID ( x-data si nr tranzactiei)
+- [done] eliminam header, folosesc builder
+- [done] sa folosesc API de date si time in js - https://date-fns.org/docs/Getting-Started
+- [done] details -> MEMO
+- [done] referinta la REFNUM ( cand exista)
+- [done] informatii despre PAYEE
+- [done] de scos FITID ( x-data si nr tranzactiei)
 
 - fctie de dispatch pt conversie tranzactii in xml:
     - Cumparare POS
