@@ -1,4 +1,4 @@
-const xmlConverter = require("xmlbuilder2");
+const { create } = require("xmlbuilder2");
 const dateFns = require("date-fns");
 
 function transactionType(credit, debit) {
@@ -30,30 +30,29 @@ function convertCsvToOfx(transactions, options) {
     const body = {
         OFX: {
             SIGNONMSGSRSV1: {},
-        BANKMSGSRSV1: {
-            STMTTRNRS: {
-                STMTRS: {
-                    CURDEF: "RON",
-                    BANKACCTFROM: {
-                        BANKID: '000000007',
-                        ACCTID: '00000013',
-                        ACCTTYPE: "CHECKING"
-                    },
-                    BANKTRANLIST: {
-                        STMTTRN: [
-                            transactions.map(t => mapTransaction(t)),
-                        ]
+            BANKMSGSRSV1: {
+                STMTTRNRS: {
+                    STMTRS: {
+                        CURDEF: "RON",
+                        BANKACCTFROM: {
+                            BANKID: '000000007',
+                            ACCTID: '00000013',
+                            ACCTTYPE: "CHECKING"
+                        },
+                        BANKTRANLIST: {
+                            STMTTRN: [
+                                transactions.map(t => mapTransaction(t)),
+                            ]
+                        }
                     }
                 }
             }
         }
-        }
     };
-    
-    const frag = xmlConverter.fragment();
-    frag.ele(body);
-    const xml = frag.end({ prettyPrint: true });
-    
+
+    const doc = create({ encoding: "UTF-8" }, body);
+
+    const xml = doc.end({ prettyPrint: true });
     return xml;
 }
 
