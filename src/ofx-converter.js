@@ -1,21 +1,23 @@
-const { create } = require("xmlbuilder2");
-const dateFns = require("date-fns");
+import xmlbuilder2 from "xmlbuilder2";
+import dateFns from "date-fns";
 
-function transactionType(credit, debit) {
+const { create } = xmlbuilder2;
+
+export function transactionType(credit, debit) {
     if (credit !== "0" && debit === "0") {
         return 'CREDIT'
     }
     return 'DEBIT'
 };
 
-function transactionAmt(credit, debit) {
+export function transactionAmt(credit, debit) {
     if (credit !== "0" && debit === "0") {
         return credit;
     }
     return -Math.abs(debit);
 }
 
-function mapTransaction(tx) {
+export function mapTransaction(tx) {
     const { credit, debit, title, date, txNumber, details, parsedDetails } = tx;
 
     switch (title) {
@@ -117,7 +119,7 @@ function mapTransaction(tx) {
     }
 };
 
-function convertCsvToOfx(transactions, options) {
+export function convertCsvToOfx(transactions, options) {
     const body = {
         OFX: {
             SIGNONMSGSRSV1: {},
@@ -146,6 +148,3 @@ function convertCsvToOfx(transactions, options) {
     const xml = doc.end({ prettyPrint: true });
     return xml;
 }
-
-exports.mapTransaction = mapTransaction;
-exports.convertCsvToOfx = convertCsvToOfx;

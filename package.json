@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://netdava.github.io/transaction-selector/",
+  "type": "module",
   "dependencies": {
     "@atlaskit/css-reset": "^5.0.10",
     "@testing-library/jest-dom": "^4.2.4",
