@@ -1,8 +1,7 @@
 import Papa from "papaparse";
 import _ from "lodash";
-import formatISO from 'date-fns/formatISO';
-import parse from 'date-fns/parse';
-import ro from 'date-fns/locale/ro';
+import fns from 'date-fns';
+import ro from 'date-fns/locale/ro/index.js';
 
 /**
  * Process CSV file with ING transactions and return a javacript array with all the transactions.
@@ -34,11 +33,11 @@ export function safeParseAmount(amount) {
  */
 export function localDateToLocalDateIsoFormat(date) {
   try {
-    const result = parse(date, 'dd MMMM yyyy', new Date(), {
+    const result = fns.parse(date, 'dd MMMM yyyy', new Date(), {
       locale: ro
     });
     // console.log(`Date is '${date}' - ${result}`);
-    return formatISO(result, { representation: 'date' })
+    return fns.formatISO(result, { representation: 'date' })
 
   } catch (e) {
     return "2050-01-01";
@@ -103,7 +102,6 @@ export function parseTransactions(transactionLines) {
     const txn = buildTransaction(key, value);
     txns.push(txn);
   }
-  console.log(txns);
   return txns;
 }
 
@@ -150,7 +148,10 @@ export function cleanTransactionsLines(lines) {
  */
 export function parseCsv(csvData) {
   const csv = Papa.parse(csvData);
+  if (csv.errors.length > 0) {
+    throw new Error(`Exeption parsing csv ${JSON.stringify(csv.errors)}`)
+  }
   //   console.log(csv);
 
-  return csv;
+  return csv.data;
 }
