@@ -22,12 +22,34 @@ export function transactionType(credit, debit) {
     return 'DEBIT'
 };
 
-export function transactionAmt(credit, debit) {
-
-    if (credit !== "0" && debit === "0") {
-        return currency(credit, settings).format();
+export function isCredit(credit, debit) {
+    if (credit === "0" && debit === "0") {
+        throw new Error(`Transaction invalid with credit = ${credit} and debit = ${debit}`);
     }
-    return `-${currency(debit, settings).format()}`;
+    if (credit !== "0" && debit === "0") {
+        return true;
+    }
+    return false;
+};
+
+function parseCurrency(curr) {
+    return currency(curr, settings).format();
+}
+
+function parseCredit(amount) {
+    return parseCurrency(amount);
+}
+
+function parseDebit(amount) {
+    return `-${parseCurrency(amount)}`;
+}
+
+export function transactionAmt(credit, debit) {
+    if (isCredit(credit, debit)) {
+        return parseCredit(credit);
+    } else {
+        return parseDebit(debit);
+    }
 }
 
 export function mapTransaction(tx) {
@@ -91,6 +113,7 @@ export function mapTransaction(tx) {
                 TRNTYPE: transactionType(credit, debit),
                 DTPOSTED: dateFns.format(new Date(date), "yyyyMMdd"),
                 TRNAMT: transactionAmt(credit, debit),
+                NAME: parsedDetails.Ordonator,
                 FITID: `x-${date}-${txNumber}`,
                 MEMO: details.toString(),
                 REFNUM: parsedDetails.Referinta,
@@ -162,8 +185,7 @@ export function convertCsvToOfx(transactions, options) {
     return xml;
 }
 
-export function csvToJson(csvFileName, pathToCsv) {
-    const csvData = fs.readFileSync(path.resolve(`${pathToCsv}${csvFileName}.csv`), 'utf8');
-    const txns = processCsv(parseCsv(csvData));
-    fs.writeFileSync(`src/data/samples/${csvFileName}.json`, JSON.stringify(txns));
+export function csvToJson(file) {
+    const txns = processCsv(parseCsv(file));
+    return JSON.stringify(txns);
 }

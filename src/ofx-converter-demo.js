@@ -1,23 +1,16 @@
 import fs from 'fs';
-import { convertCsvToOfx, csvToJson } from './ofx-converter.js';
+import { convertCsvToOfx, csvToJson }from './ofx-converter.js';
 import path from 'path';
 
-function jsonToOfx(jsonData, output) {
+function jsonToOfx(jsonData) {
     const transactions = JSON.parse(jsonData);
     const xml = convertCsvToOfx(transactions,{});
-    fs.writeFileSync(output, xml);
+    return xml;
 }
 
-csvToJson('iunie-iulie', 'src/data/stan_andrei_csv/');
-// csvToJson('ing-iunie-2020', 'src/data/stan_andrei_csv/');
-// csvToJson('ing-iulie-2020', 'src/data/stan_andrei_csv/');
-
-const iunieIulie2020 = fs.readFileSync( path.resolve('src/data/samples/iunie-iulie.json'), 'utf8');
-// const ingIunie2020 = fs.readFileSync( path.resolve('src/data/samples/ing-iunie-2020.json'), 'utf8');
-// const ingIulie2020 = fs.readFileSync( path.resolve('src/data/samples/ing-iulie-2020.json'), 'utf8');
-
-jsonToOfx(iunieIulie2020, 'build/iunie-iulie.xml.ofx');
-// jsonToOfx(ingIunie2020);
-// jsonToOfx(ingIulie2020)
+const iunieIulieCsv = fs.readFileSync(path.resolve('src/data/stan_andrei_csv/iunie-iulie.csv'), 'utf8');
+fs.writeFileSync(`src/data/samples/iunie-iulie.json`, csvToJson(iunieIulieCsv));
+const iunieIulieJson = fs.readFileSync( path.resolve('src/data/samples/iunie-iulie.json'), 'utf8');
+fs.writeFileSync('build/iunie-iulie.xml.ofx', jsonToOfx(iunieIulieJson));
 
 
