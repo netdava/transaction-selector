@@ -8,9 +8,20 @@ function jsonToOfx(jsonData) {
     return xml;
 }
 
-const iunieIulieCsv = fs.readFileSync(path.resolve('src/data/stan_andrei_csv/iunie-iulie.csv'), 'utf8');
-fs.writeFileSync(`src/data/samples/iunie-iulie.json`, csvToJson(iunieIulieCsv));
-const iunieIulieJson = fs.readFileSync( path.resolve('src/data/samples/iunie-iulie.json'), 'utf8');
-fs.writeFileSync('build/iunie-iulie.xml.ofx', jsonToOfx(iunieIulieJson));
+const maiCsv = fs.readFileSync(path.resolve('src/data/stan_andrei_csv/mai-2020.csv'), 'utf8');
+fs.writeFileSync(`src/data/samples/mai.json`, csvToJson(maiCsv));
+const maiJson = fs.readFileSync( path.resolve('src/data/samples/mai.json'), 'utf8');
+fs.writeFileSync('build/mai.xml.ofx', jsonToOfx(maiJson));
+
+const iunieCsv = fs.readFileSync(path.resolve('src/data/stan_andrei_csv/iunie-2020.csv'), 'utf8');
+fs.writeFileSync(`src/data/samples/iunie.json`, csvToJson(iunieCsv));
+const iunieJson = fs.readFileSync( path.resolve('src/data/samples/iunie.json'), 'utf8');
+fs.writeFileSync('build/iunie.xml.ofx', jsonToOfx(iunieJson));
+
+const iulieCsv = fs.readFileSync(path.resolve('src/data/stan_andrei_csv/iulie-2020.csv'), 'utf8');
+fs.writeFileSync(`src/data/samples/iulie.json`, csvToJson(iulieCsv));
+const iulieJson = fs.readFileSync( path.resolve('src/data/samples/iulie.json'), 'utf8');
+fs.writeFileSync('build/iulie.xml.ofx', jsonToOfx(iulieJson));
+
 
 
