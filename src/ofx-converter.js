@@ -9,10 +9,10 @@ import { processCsv, parseCsv } from './ing-parser/index.js';
 
 const { create } = xmlbuilder2;
 
-function uniqueTnxId(credit, debit, balance, details) {
-    const detailsSorted = details.sort();
-    const detailsAsStr = detailsSorted.join();
-    const txData = credit.concat(debit, balance, detailsAsStr);
+function uniqueTnxId(tx) {
+    const { title, date, credit, debit, balance, details} = tx;
+    const  detailsStr = details.sort().join();
+    const txData = ''.concat(title, date, credit, debit, balance, detailsStr);
     const hashedStr = md5(txData);
     return hashedStr;
 }
@@ -62,7 +62,7 @@ export function transactionAmt(credit, debit) {
 }
 
 export function mapTransaction(tx) {
-    const { credit, debit, title, date, txNumber,balance, details, parsedDetails } = tx;
+    const { credit, debit, title, date, balance, details, parsedDetails } = tx;
 
     switch (title) {
         case 'Cumparare POS':
@@ -71,7 +71,7 @@ export function mapTransaction(tx) {
                 DTPOSTED: dateFns.format(new Date(date), "yyyyMMdd"),
                 TRNAMT: transactionAmt(credit, debit),
                 NAME: parsedDetails.Terminal,
-                FITID: uniqueTnxId(credit, debit, balance, details),
+                FITID: uniqueTnxId(tx),
                 MEMO: details.toString(),
                 REFNUM: parsedDetails.Referinta,
             }
@@ -82,7 +82,7 @@ export function mapTransaction(tx) {
                 DTPOSTED: dateFns.format(new Date(date), "yyyyMMdd"),
                 TRNAMT: transactionAmt(credit, debit),
                 NAME: 'ING BANK',
-                FITID: uniqueTnxId(credit, debit, balance, details),
+                FITID: uniqueTnxId(tx),
                 MEMO: details.toString(),
                 REFNUM: parsedDetails.Referinta,
             }
@@ -93,7 +93,7 @@ export function mapTransaction(tx) {
                 DTPOSTED: dateFns.format(new Date(date), "yyyyMMdd"),
                 TRNAMT: transactionAmt(credit, debit),
                 NAME: 'ING BANK',
-                FITID: uniqueTnxId(credit, debit, balance, details),
+                FITID: uniqueTnxId(tx),
             }
             break;
         case 'Plata debit direct':
@@ -102,7 +102,7 @@ export function mapTransaction(tx) {
                 DTPOSTED: dateFns.format(new Date(date), "yyyyMMdd"),
                 TRNAMT: transactionAmt(credit, debit),
                 NAME: parsedDetails.Beneficiar,
-                FITID: uniqueTnxId(credit, debit, balance, details),
+                FITID: uniqueTnxId(tx),
                 MEMO: details.toString(),
                 REFNUM: parsedDetails.Referinta,
             }
@@ -113,7 +113,7 @@ export function mapTransaction(tx) {
                 DTPOSTED: dateFns.format(new Date(date), "yyyyMMdd"),
                 TRNAMT: transactionAmt(credit, debit),
                 NAME: "ING BANK",
-                FITID: uniqueTnxId(credit, debit, balance, details),
+                FITID: uniqueTnxId(tx),
                 MEMO: title,
             }
             break;
@@ -123,7 +123,7 @@ export function mapTransaction(tx) {
                 DTPOSTED: dateFns.format(new Date(date), "yyyyMMdd"),
                 TRNAMT: transactionAmt(credit, debit),
                 NAME: parsedDetails.Ordonator,
-                FITID: uniqueTnxId(credit, debit, balance, details),
+                FITID: uniqueTnxId(tx),
                 MEMO: details.toString(),
                 REFNUM: parsedDetails.Referinta,
             }
@@ -134,7 +134,7 @@ export function mapTransaction(tx) {
                 DTPOSTED: dateFns.format(new Date(date), "yyyyMMdd"),
                 TRNAMT: transactionAmt(credit, debit),
                 NAME: parsedDetails.Terminal,
-                FITID: uniqueTnxId(credit, debit, balance, details),
+                FITID: uniqueTnxId(tx),
                 MEMO: details.toString(),
             }
             break;
@@ -144,7 +144,7 @@ export function mapTransaction(tx) {
                 DTPOSTED: dateFns.format(new Date(date), "yyyyMMdd"),
                 TRNAMT: transactionAmt(credit, debit),
                 NAME: parsedDetails.Beneficiar,
-                FITID: uniqueTnxId(credit, debit, balance, details),
+                FITID: uniqueTnxId(tx),
                 MEMO: details.toString(),
                 REFNUM: parsedDetails.Referinta,
             }
@@ -155,7 +155,7 @@ export function mapTransaction(tx) {
                 DTPOSTED: dateFns.format(new Date(date), "yyyyMMdd"),
                 TRNAMT: transactionAmt(credit, debit),
                 NAME: parsedDetails.Terminal,
-                FITID: uniqueTnxId(credit, debit, balance, details),
+                FITID: uniqueTnxId(tx),
                 MEMO: details.toString(),
             }
             break;
