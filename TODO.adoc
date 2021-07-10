@@ -1,0 +1,17 @@
+- [done] eliminam header, folosesc builder
+- [done] sa folosesc API de date si time in js - https://date-fns.org/docs/Getting-Started
+- [done] details -> MEMO
+- [done] referinta la REFNUM ( cand exista)
+- [done] informatii despre PAYEE
+- [done] de scos FITID ( x-data si nr tranzactiei)
+
+- fctie de dispatch pt conversie tranzactii in xml:
+    - Cumparare POS
+    - Taxe si comisioane
+    - Comision
+    - Plata debit direct
+    - Actualizare dobanda - configuratie manuala
+    - Incasare
+    - Comision pe operatiune
+    - Retragere numerar
+    - pentru tip necunoscut, arunca exceptie cu titlul

@@ -3,19 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://netdava.github.io/transaction-selector/",
+  "type": "module",
   "dependencies": {
     "@atlaskit/css-reset": "^5.0.10",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "date-fns": "^2.12.0",
-    "lodash": "^4.17.15",
+    "blueimp-md5": "^2.18.0",
+    "currency.js": "^2.0.3",
+    "date-fns": "^2.15.0",
+    "lodash": "^4.17.20",
     "papaparse": "^5.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-dropzone": "^10.2.2",
-    "react-scripts": "3.4.1",
-    "styled-components": "^5.0.1"
+    "react-scripts": "^3.4.3",
+    "styled-components": "^5.0.1",
+    "xmlbuilder2": "^2.3.1"
   },
   "scripts": {
     "start": "react-scripts start",
